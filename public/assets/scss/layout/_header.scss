@@ -1,0 +1,36 @@
+.wrap-header{
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+   .h-logo{
+       height: 30px;
+   }
+
+   .m-logo{
+       display: none;
+   }
+
+   .nav-cart{
+    //    display: inline-flex;
+        // justify-content: center;
+    //    flex-direction:column;
+       position: relative;
+       margin: 5px;
+   }
+
+    @include media-breakpoint-down(md) {
+        width: 100%;
+
+        .h-logo{
+            display: none;
+        }
+
+        .m-logo{
+            display: inline-flex;
+            position: absolute;
+            height: 30px;
+            top: 12px;
+            left: 30%;
+        }
+    }
+}

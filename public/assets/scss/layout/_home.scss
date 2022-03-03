@@ -1,0 +1,59 @@
+.wrap-home{
+    .banner{
+        background-size:cover;
+        background-position:left;
+        height: 200px;
+        margin: auto;
+        img{
+            width: 100%;
+            z-index: -1;
+        }
+        
+        .title{
+            text-align: center;
+            font-size: 32px;
+            h1{
+                color: #333;
+                padding-top: 10px;
+            }
+            h2{
+                color:red;
+            }
+        }
+        
+
+        .search-input{
+            text-align: center;
+
+            .icon-search{
+                background-color: transparent;
+                border: none;
+                outline: none;
+                transform: translateX(25px);
+            }
+
+            input{
+                font-size: 20px;
+                padding: 8px;
+                outline: none;
+                border: none;
+                width: 60%;
+                border-radius: 15px;
+                text-indent: 25px;
+            }
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        width: 100%;
+
+        .banner{
+            .search-input{
+                input{
+                    width: 80%;
+                }
+            }
+        }
+
+    }
+}

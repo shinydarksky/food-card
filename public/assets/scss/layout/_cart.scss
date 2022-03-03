@@ -1,0 +1,55 @@
+.wrap-cart{
+    min-height: 500px;
+    .title{
+        margin-top: 20px;
+        h2{
+            font-size: 28px;
+        }
+    }
+
+
+    .cart-content{
+        display: flex;
+        flex-wrap: wrap;
+        .food-item{
+            padding: 10px;
+            flex-basis: 25%;
+
+            .group-button{
+                text-align: center;
+
+                input{
+                    width: 40px;
+                    outline: none;
+                    border: none;
+                    background-color: transparent;
+                    text-align: center;
+                    color: white;
+                    font-size: bold;
+                    -webkit-appearance: "Always Show Up/Down Arrows";
+                }
+                input[type=number]::-webkit-inner-spin-button {
+                    opacity: 1
+                }
+
+                .btn-cart{
+                    margin-right: 3px;
+                }
+            }
+        }
+        @include media-breakpoint-down(md) {
+            .food-item{
+                flex-basis: 50%;
+            }
+        }
+    
+        @include media-breakpoint-down(sm) {
+            .food-item{
+                    flex-basis: 100%;
+            }
+        }
+    }
+
+
+    
+}

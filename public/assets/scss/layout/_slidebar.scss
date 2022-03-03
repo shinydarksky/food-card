@@ -1,0 +1,128 @@
+.slide-bar-layout{
+    display: flex;
+    .slide-bar{
+        flex-basis: 75%;
+        background-color: #262626;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        .slide-control{
+            z-index: 20;
+            background-color: #262626;
+            max-width: 100px;
+            .button-control{
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-color: transparent;
+                width: 40px;
+                height: 40px;
+                margin: 10px 20px;
+                padding: auto;
+                border-radius: 50%;
+                cursor: pointer;
+                border: 1px solid white;
+            }
+            flex-basis: 10%;
+        }
+    
+        .button-play{
+            background-image: url(/assets/images/icon-play.png);
+        }
+        .button-pause{
+            background-image: url(/assets/images/icon-pause.png);
+        }
+    
+        .slide-view{
+            position: relative;
+            height: 50px;
+            flex-basis: 75%;
+            &-bar{
+                display: flex;
+                position: absolute;
+                z-index: 1;
+                background-color: #262626;
+                white-space: nowrap;
+            }
+    
+            &-item{
+                display: inline-block;
+                padding:16px 50px 20px 20px;
+                color: white;
+                flex: 1;
+                font-weight: bold;
+                .coin-name{
+                    color: white;
+                }
+                .coin-price-up{
+                    color: green;
+                }
+                .coin-price-down{
+                    color: red;
+                }
+            }
+            &-item:hover{
+                transform: scale(1.05);
+                cursor: pointer;
+            }
+        }
+    
+    
+       
+        @include media-breakpoint-down(md) {
+            margin-left: 0px;
+        }
+    
+        
+        
+    }
+    .slide-right{
+        color: white;
+        z-index: 20;
+        background-color: #262626;
+        text-indent: 20px;
+        display: flex;
+        flex-basis: 30%;
+        height: 60px;
+        &-item{ 
+            border-left: 2px solid white;
+            padding-top: 16px;
+            display: inline;
+            width: 50%;
+            text-align: center;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        flex-wrap: wrap;
+        .slide-bar{
+            flex-basis: 100%;
+        }
+
+        .slide-right{
+            background-color: #fff;
+            color: black;
+            font-weight: bold;
+            font-size: 15px;
+            margin-left: 0px;
+            flex-basis: 100%;
+
+            &-item{ 
+                box-shadow: 3px 1px 1px rgb(95, 95, 95);
+            }
+        }
+    }
+}
+
+
+.pagination-bar{
+    .pagination{
+        justify-content: center !important;
+
+        .page-link-active{
+            background-color: black !important;
+            color: white !important;
+        }
+    }
+}

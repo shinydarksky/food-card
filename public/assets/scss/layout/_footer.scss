@@ -1,0 +1,44 @@
+.footer-wraper{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    border-top: 1px solid black;
+    padding-top: 20px;
+
+    .main{
+        p{
+            
+        }
+    }
+
+    p{
+        color:#9c9c9c;
+
+        .support-loship{
+            text-decoration: none;
+        }
+    }
+
+    .logo-loship{
+        width: 100px;
+    }
+
+    .special-info{
+        font-size: 14px;
+    }
+
+    .col{
+
+        h3{
+            font-size: 20px;
+        }
+
+        &-item{
+            display: block;
+            margin: 3px;
+            color:#9c9c9c;
+            text-decoration: none;
+            font-size: 16px;
+        }
+    }
+}
