@@ -48,12 +48,13 @@ export const registerUser = createAsyncThunk(
     'auth/registerUser',
     async (data, thunkAPI) => {
         try {
-            const { username, password1, password2 } = data
-            createUser(username, password1, password2)
-            if (false) {
-                return {}
+            const { username, password } = data
+            const response = await createUser(username,password)
+            if(response.success){
+                const {accessToken} = response
+                return await getUserFormToken(accessToken)
             }
-            else throw 'Đăng nhập thất bại'
+            else throw 'Đăng ký thất bại'
 
         }
         catch (err) {
@@ -65,7 +66,6 @@ export const registerUser = createAsyncThunk(
 export const loadUser = createAsyncThunk(
     'auth/loadUser',
     async (data, thunkAPI) => {
-        await sleep(1000)
         try {
             const token = JSON.parse(localStorage.getItem('accessToken'))
             const response = await getUser(token)
@@ -88,7 +88,7 @@ const auth = createSlice({
     initialState: initState,
     reducers: {
         setLogout: (state, action) => {
-
+            localStorage.removeItem('accessToken')
             return initState
         },
 
@@ -101,7 +101,6 @@ const auth = createSlice({
         [signInUser.fulfilled]: (state, action) => {
             state.isAuth = true
             state.loading = false
-            state.isError = false
             state.user = action.payload
         },
         [signInUser.rejected]: (state, action) => {
@@ -118,13 +117,13 @@ const auth = createSlice({
         [loadUser.fulfilled]: (state, action) => {
             state.isAuth = true
             state.loading = false
-            state.isError = false
             state.user = action.payload
         },
         [loadUser.rejected]: (state, action) => {
             state.loading = false
             state.isAuth = false
             state.isError = true
+            localStorage.removeItem('accessToken')
         },
 
 
@@ -135,8 +134,6 @@ const auth = createSlice({
         [registerUser.fulfilled]: (state, action) => {
             state.isAuth = true
             state.loading = false
-            state.isError = false
-            state.user = action.payload
         },
         [registerUser.rejected]: (state, action) => {
             state.loading = false

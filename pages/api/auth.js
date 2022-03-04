@@ -30,10 +30,13 @@ async function getUser(accessToken) {
     })
 }
 
-function createUser(username, password1, password2) {
-    axios.put(`${urlServer}/auth`, {
+async function createUser(username, password) {
+    return await axios.put(`${urlServer}/auth`, {
         username: username,
-        password: password1
+        password: password
+    }).then(({data})=>{
+        localStorage.setItem('accessToken', JSON.stringify(data.accessToken))
+        return data
     })
 }
 

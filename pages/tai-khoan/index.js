@@ -13,6 +13,7 @@ export default function index() {
 
     }, [])
 
+    const { user } = auth
 
     return (
         <Layout>
@@ -25,14 +26,14 @@ export default function index() {
                 </div>
             </div>}
             {auth.isAuth ? <div>
-                <Dashboard role="customer"/>
+                <Dashboard role={user.role} />
             </div> :
                 <div className="error-wrapper">
                     <h2 ><span >Tài khoản chưa đăng nhập</span> | hoặc đăng nhập thất bại
-                        <br />hãy trở về <a href="/">Trang chủ </a> 
-                         hoặc đăng nhập lại <span 
-                            onClick={()=>dispatch(setOpenLoginForm())}
-                         >Đăng nhập</span> </h2>
+                        <br />hãy trở về <a href="/">Trang chủ </a>
+                        hoặc đăng nhập lại <span
+                            onClick={() => dispatch(setOpenLoginForm())}
+                        >Đăng nhập</span> </h2>
                 </div>}
         </Layout>
     )

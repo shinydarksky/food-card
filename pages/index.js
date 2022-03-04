@@ -1,7 +1,7 @@
 import CategoryFood from "../components/categoryfood"
 import { useRouter } from "next/router";
 import Layout from "../layout"
-import { getPageHome,getFoodFromArea } from "./api/food";
+import { getPageHome, getFoodFromArea } from "./api/food";
 
 export async function getStaticProps(context) {
 	try {
@@ -26,10 +26,10 @@ export async function getStaticProps(context) {
 }
 
 
-export default function Home({listFood}) {
+export default function Home({ listFood }) {
 
 	const router = useRouter()
-	
+
 	function handleSearch(e) {
 		e.preventDefault()
 		router.push({
@@ -50,7 +50,7 @@ export default function Home({listFood}) {
 						<div className="title">
 							<h1>Đặt món ăn tại</h1>
 							<h2>LTSHIP</h2>
-							
+
 						</div>
 						<div className="search-input">
 							<form onSubmit={handleSearch}>

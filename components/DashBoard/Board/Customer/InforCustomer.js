@@ -1,6 +1,12 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 export default function InforCustomer() {
+
+	const {auth} = useSelector(state=>state)
+
+	// console.log(auth);
+
 	return (
 		<div className="row mt-3">
 			<div className="text-center">
