@@ -2,8 +2,8 @@ import { urlServer } from "./urls";
 import axios from "axios";
 
 
-async function getListUser(){
-    return await axios.get(`${urlServer}/user`).then(({data})=>{
+async function getListUser(role=''){
+    return await axios.get(`${urlServer}/user?type=${role}`).then(({data})=>{
         return data
     }).catch(err=>err)
 }
@@ -14,8 +14,22 @@ async function updateUser(_id,data){
     }).catch(err=>err)
 }
 
+async function getUserInfor(_id){
+    return await axios.get(`${urlServer}/user/infor?id=${_id}`).then(({data})=>{
+        return data
+    }).catch(err=>err)
+}
+
+async function updateUserInfor(_id,data){
+    return await axios.post(`${urlServer}/user/infor`,{_id:_id,data}).then(({data})=>{
+        return data
+    }).catch(err=>err)
+}
+
 
 export {
     getListUser,
-    updateUser
+    updateUser,
+    getUserInfor,
+    updateUserInfor
 }

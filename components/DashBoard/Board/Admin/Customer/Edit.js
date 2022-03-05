@@ -2,7 +2,7 @@ import React from 'react'
 import Modal from '../../../../modal'
 import { menuRole } from '../../../../data/menu'
 import { updateUser } from '../../../../../pages/api/user'
-export default function Edit({ data, onClose }) {
+export default function Edit({ data, onClose,cb }) {
 
     let title = "Chỉnh sửa tài khoản: "
     title += data.username
@@ -22,6 +22,7 @@ export default function Edit({ data, onClose }) {
 
         const response = await updateUser(data._id,{role:role})
         if(response.success){
+            cb()
             alert(response.message)
         }
         else

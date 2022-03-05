@@ -1,5 +1,10 @@
 export const menuAdmin = [
     {
+        title:'Thông tin',
+        icon:'fas fa-user',
+        href:'infor-customer'
+    },
+    {
         title:'Doanh số',
         icon:'fas fa-server',
         href:'infor'
@@ -15,15 +20,16 @@ export const menuAdmin = [
         href:'shipper'
     },
     {
+        title:'Khách hàng',
+        icon:'fas fa-user',
+        href:'customer'
+    },
+    {
         title:'Đơn hàng',
         icon:'fas fa-receipt',
         href:'receipt'
     },
-    {
-        title:'Khách hàng',
-        icon:'fas fa-user',
-        href:'customer'
-    }
+   
 ]
 
 
