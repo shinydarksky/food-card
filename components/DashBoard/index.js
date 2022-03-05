@@ -3,10 +3,10 @@ import { menuAdmin, menuCustomer, menuShipper, menuStore } from '../data/menu'
 import Board from './Board'
 import NavMenu from './NavMenu'
 
-export default function index({ role }) {
+export default function index({ user }) {
 	const [currentMenu, setCurrentMenu] = useState(renderRole()[0])
 	function renderRole() {
-		switch (role) {
+		switch (user.role) {
 			case 'admin':
 				return menuAdmin
 			case 'customer':
@@ -26,9 +26,11 @@ export default function index({ role }) {
 
 	return (
 		<div className="wrap-dashboard row">
-			<NavMenu menu={renderRole()}
+			<NavMenu 
+				menu={renderRole()}
 				currentMenu={currentMenu}
 				handleMenu={handleMenu}
+				user={user}
 			/>
 			<Board currentMenu={currentMenu} menu={renderRole()} />
 		</div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setLogout } from '../../../redux/authSlice'
-export default function NavMenu({ menu, currentMenu, handleMenu }) {
+export default function NavMenu({ menu, currentMenu, handleMenu,user }) {
     const dispatch = useDispatch()
     
     function renderMenuItem() {
@@ -44,7 +44,7 @@ export default function NavMenu({ menu, currentMenu, handleMenu }) {
                 <div className="dropdown">
                     <a href="#" className="d-flex align-items-center link-dark text-decoration-none" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="https://github.com/mdo.png" alt="" width={32} height={32} className="rounded-circle me-2" />
-                        <strong>mdo</strong>
+                        <strong>{user.username}</strong>
                     </a>
 
                     <span className="dropdown-item" 

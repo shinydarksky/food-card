@@ -26,7 +26,7 @@ export default function index() {
                 </div>
             </div>}
             {auth.isAuth ? <div>
-                <Dashboard role={user.role} />
+                <Dashboard user={user} />
             </div> :
                 <div className="error-wrapper">
                     <h2 ><span >Tài khoản chưa đăng nhập</span> | hoặc đăng nhập thất bại

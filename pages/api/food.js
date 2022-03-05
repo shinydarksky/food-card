@@ -10,6 +10,15 @@ async function getFoodFromArea(area='all', keyword='') {
     return []
 }
 
+async function searchFood(storeId='',area='') {
+    const results = await axios.get(`${urlServer}/food?${storeId&&'storeId='+storeId}${area&&'&area='+area}`)
+    const { data } = results
+    if(data.success){
+        return data.results
+    }
+    return []
+}
+
 async function getPageHome() {
     // call food by api
     return []
@@ -23,5 +32,6 @@ async function getFoodFromCart() {
 export {
     getFoodFromArea,
     getPageHome,
-    getFoodFromCart
+    getFoodFromCart,
+    searchFood
 }

@@ -6,14 +6,23 @@ import {
     Shipper,
     Store,
 } from './Admin'
-import { HistoryOrder, InforCustomer, LocationAddress, Order } from './Customer'
+import {
+    HistoryOrder,
+    InforCustomer,
+    LocationAddress,
+    Order
+} from './Customer'
+import {
+    InforStore
+} from './Store'
+
 import { useSelector } from 'react-redux'
 
 export default function Board({ currentMenu }) {
 
 
     const { auth } = useSelector(state => state)
-    
+
     function renderCurrentMenu() {
         switch (currentMenu.href) {
             case 'infor': //admin
@@ -27,13 +36,15 @@ export default function Board({ currentMenu }) {
             case 'customer':
                 return <Customer />
             case 'infor-customer': // customer
-                return <InforCustomer auth={auth}/>
+                return <InforCustomer auth={auth} />
             case 'locaiton-address':
                 return <LocationAddress />
             case 'current-receipt':
                 return <Order />
             case 'all-receipt':
                 return <HistoryOrder />
+            case 'infor-store':
+                return <InforStore auth={auth} />
         }
     }
 

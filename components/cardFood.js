@@ -21,7 +21,7 @@ export default function CardFood({ food}) {
 
     return (
         <div className="card food-item" style={{ width: '18rem' }}>
-            <img src="https://cdn.daylambanh.edu.vn/wp-content/uploads/2018/12/banh-tra-sua-tran-chau-duong-den.jpg" className="card-img-top" alt="..." />
+            <img src={food.image} className="card-img-top" alt="..." />
             <div className="card-body">
                 <h5 className="card-title">{food.name}</h5>
                 <p className="card-text">{food.price}$</p>

@@ -65,7 +65,7 @@ export const menuStore = [
     {
         title:'Cửa hàng',
         icon:'fas fa-store',
-        href:'store-infor'
+        href:'infor-store'
     },
     {
         title:'Doanh thu',

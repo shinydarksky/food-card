@@ -33,7 +33,6 @@ export default function Category({ listFood }) {
         })
     }
 
-
     function renderCategoryFood() {
         if (listFood.length > 0) {
             return listFood.map((item, idx) => {
