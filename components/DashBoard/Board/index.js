@@ -49,7 +49,7 @@ export default function Board({ currentMenu }) {
     }
 
     return (
-        <div className="col">
+        <div className="col wrap-board">
             {renderCurrentMenu()}
         </div>
     )

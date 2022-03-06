@@ -26,7 +26,7 @@ export default function index({ user }) {
 
 	return (
 		<div className="wrap-dashboard row">
-			<NavMenu 
+			<NavMenu
 				menu={renderRole()}
 				currentMenu={currentMenu}
 				handleMenu={handleMenu}

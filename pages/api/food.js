@@ -19,6 +19,20 @@ async function searchFood(storeId='',area='') {
     return []
 }
 
+async function addFood(formData){
+    const response = await axios({
+        method: "post",
+        url: "http://localhost:8080/food",
+        data: formData,
+        headers: { "Content-Type": "multipart/form-data" },
+    })
+    const { data } = response
+    if(data.success){
+        return data.results
+    }
+    return null
+}
+
 async function getPageHome() {
     // call food by api
     return []
@@ -33,5 +47,6 @@ export {
     getFoodFromArea,
     getPageHome,
     getFoodFromCart,
-    searchFood
+    searchFood,
+    addFood
 }

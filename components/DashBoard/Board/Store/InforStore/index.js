@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import BlockFood from './BlockFood'
 import Discount from './Discount'
 import { storeTab } from '../../../../data/tab'
-import { searchFood } from '../../../../../pages/api/food'
 export default function InforStore({ auth }) {
     const [onTab, setOnTab] = useState(storeTab[0])
-    const [listFood, setListFood] = useState([])
+
     const { user } = auth
 
     function renderTab() {
         switch (onTab) {
             case storeTab[0]:
-                return <BlockFood data={listFood}/>
+                return <BlockFood user={user}/>
             case storeTab[1]:
                 return <Discount />
             default:
@@ -19,10 +18,6 @@ export default function InforStore({ auth }) {
         }
     }
 
-    useEffect(async () => {
-        const response = await searchFood(user._id)
-        setListFood(response)
-    }, [])
 
     return (
         <div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { getUserInfor, updateUserInfor } from '../../../../pages/api/user'
+import FieldInput from '../../../Field/FieldInput';
 import Moment from 'moment';
 export default function InforCustomer({ auth }) {
 	const [userInfor, setUserInfor] = useState({})
@@ -10,35 +11,37 @@ export default function InforCustomer({ auth }) {
 		setUserInfor(userInfor.results)
 	}, [])
 
-	const {userId, email, phone, gender, birth } = userInfor || {}
+	const { userId, email, phone, gender, birth, fullname } = userInfor || {}
 
 	async function handleSubmit(e) {
 		e.preventDefault()
-		let { email, phone, gender, birth } = e.target
+		let { email, phone, gender, birth, fullname } = e.target
 		email = email.value
 		phone = phone.value
 		gender = gender.value
 		birth = birth.value
+		fullname = fullname.value
 		const formData = {
-			userId:userId,
-			email:email,
-			phone:phone,
-			gender:gender,
-			birth:birth,
+			userId: userId,
+			email: email,
+			phone: phone,
+			gender: gender,
+			birth: birth,
+			fullname: fullname,
 		}
-		const response = await updateUserInfor(userInfor._id,formData)
-		if(response.success){
+		const response = await updateUserInfor(userInfor._id, formData)
+		if (response.success) {
 			alert('Cập nhật thành công')
 		}
-		else{
+		else {
 			alert('Cập nhật thất bại')
 		}
 	}
 
-	function onChangeGender(e){
-		const temp= {}
+	function onChangeGender(e) {
+		const temp = {}
 		temp[e.target.name] = e.target.value
-		setUserInfor({...userInfor,...temp})
+		setUserInfor({ ...userInfor, ...temp })
 	}
 
 
@@ -51,47 +54,30 @@ export default function InforCustomer({ auth }) {
 				<div className="card ">
 					<form onSubmit={handleSubmit}>
 						<div className="card-body w-50 " style={{ margin: '0 auto' }}>
+							<FieldInput
+								title="Tài khoản"
+								name="username"
+								defaultValue={user.username}
+								disabled={true}
+							/>
+							<FieldInput
+								title="Họ và Tên"
+								name="fullname"
+								defaultValue={fullname}
+							/>
+							<FieldInput
+								title="Địa chỉ email"
+								name="email"
+								defaultValue={email || ''}
+								type="email"
+							/>
 
-							<div className="d-flex justify-content-between m-2">
-								<div className="col-auto w-25">
-									<label htmlFor="username" className="col-form-label">Tài khoản</label>
-								</div>
-								<div className="col-auto w-75">
-									<input
-										id="username"
-										className="form-control"
-										name="username" disabled
-										defaultValue={user.username}
-									/>
-								</div>
-							</div>
-							<div className="d-flex justify-content-between m-2">
-								<div className="col-auto w-25">
-									<label htmlFor="email" className="col-form-label">Địa chỉ email	</label>
-								</div>
-								<div className="col-auto w-75">
-									<input
-										id="email"
-										type="email"
-										className="form-control"
-										name="email"
-										defaultValue={email || ''}
-									/>
-								</div>
-							</div>
-							<div className="d-flex justify-content-between m-2">
-								<div className="col-auto w-25">
-									<label htmlFor="phone" className="col-form-label">Số điện thoại</label>
-								</div>
-								<div className="col-auto w-75">
-									<input
-										id="phone"
-										className="form-control"
-										name="phone"
-										defaultValue={phone || ''}
-									/>
-								</div>
-							</div>
+							<FieldInput
+								title="Số điện thoại"
+								name="phone"
+								defaultValue={phone || ''}
+							/>
+
 							<div className="d-flex justify-content-between m-2">
 								<div className="col-auto w-25">
 									<label htmlFor="gender" className="col-form-label">Giới tính</label>
@@ -147,9 +133,9 @@ export default function InforCustomer({ auth }) {
 										value={Moment(birth).format('YYYY-MM-DD')}
 										type="date"
 										className="form-control"
-										name="birth" 
+										name="birth"
 										onChange={onChangeGender}
-										/>
+									/>
 								</div>
 							</div>
 						</div>

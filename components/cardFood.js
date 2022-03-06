@@ -18,10 +18,9 @@ export default function CardFood({ food}) {
         }
     }
 
-
     return (
         <div className="card food-item" style={{ width: '18rem' }}>
-            <img src={food.image} className="card-img-top" alt="..." />
+            <img src={food.images[0]} className="card-img-top" alt="..." />
             <div className="card-body">
                 <h5 className="card-title">{food.name}</h5>
                 <p className="card-text">{food.price}$</p>
