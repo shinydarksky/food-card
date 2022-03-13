@@ -44,7 +44,6 @@ export default function InforCustomer({ auth }) {
 		setUserInfor({ ...userInfor, ...temp })
 	}
 
-
 	return (
 		<div className="row mt-3">
 			<div className="text-center">
@@ -53,7 +52,7 @@ export default function InforCustomer({ auth }) {
 			<div className="mt-3">
 				<div className="card ">
 					<form onSubmit={handleSubmit}>
-						<div className="card-body w-50 " style={{ margin: '0 auto' }}>
+						<div className="card-body w-50 wrap-full-mb " style={{ margin: '0 auto' }}>
 							<FieldInput
 								title="Tài khoản"
 								name="username"
@@ -145,7 +144,6 @@ export default function InforCustomer({ auth }) {
 							</button>
 						</div>
 					</form>
-
 				</div>
 			</div>
 		</div>

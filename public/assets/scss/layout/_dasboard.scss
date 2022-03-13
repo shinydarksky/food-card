@@ -12,4 +12,9 @@
             
         }
     }
+    @include media-breakpoint-down(lg){
+        .wrap-nav-menu{
+            width: 100%;
+        }
+    }
 }   

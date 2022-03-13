@@ -82,7 +82,6 @@ export default function Header() {
                     </div>
 
                 </div>
-
             </nav>
             <div>
                 <a href="/"><img className="m-logo" src="/assets/images/logo.png" alt="logo" /></a>
@@ -99,7 +98,7 @@ export default function Header() {
                     <span type="button" className="btn btn-outline-danger m-1"
                         onClick={() => {
                             router.push({
-                                pathname: '/cart',
+                                pathname: '/vo-hang',
                             })
                         }}
                     >

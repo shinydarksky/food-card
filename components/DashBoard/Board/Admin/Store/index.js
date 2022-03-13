@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import { getListUser } from '../../../../../pages/api/user';
 import { menuRole } from '../../../../data/menu';
+import Modal from '../../../../modal';
+import StoreDetail from '../../Store/InforStore'
 export default function Store() {
 
     const [listUser, setListUser] = useState([])
-    
+    const [viewStore,setViewStore] = useState(null)
     useEffect(async () => {
         await reload()
-     }, [])
+    }, [])
 
-    async function reload(){
+    async function reload() {
         const response = await getListUser("store")
         if (response.success) {
             setListUser(response.results)
         }
     }
 
-   
+
     function renderTableUser() {
         return (listUser.length > 0) && listUser.map((item, idx) => {
-            const role = menuRole.find(r=>r.role===item.role)
+            const role = menuRole.find(r => r.role === item.role)
 
             return <tr key={idx}>
                 <th scope="row">{idx + 1}</th>
@@ -29,13 +31,13 @@ export default function Store() {
                 <td>
                     <div className="text-center">
                         <button className="m-1 btn btn-success "
-                            onClick={()=>{
-                                setDataEdit(item)
+                            onClick={() => {
                             }}
                         >
                             <i className="fas fa-edit"></i>
                         </button>
-                        <button className="m-1 btn btn-warning">
+                        <button className="m-1 btn btn-warning"
+                        onClick={() => setViewStore(item)}>
                             <i className="fas fa-eye"></i>
                         </button>
                     </div>
@@ -47,7 +49,7 @@ export default function Store() {
 
     return (
         <div>
-            <div className="row ms-3 mt-3   ">
+            <div className="row ms-3 mt-3 ">
                 <div className="title col">
                     <h5>Danh sách cửa hàng</h5>
                 </div>
@@ -75,6 +77,13 @@ export default function Store() {
                     </tbody>
                 </table>
             </div>
+            {viewStore &&
+                <Modal title="Thông tin cửa hàng"
+                    onClose={() => setViewStore(null)}
+                >
+                    <StoreDetail auth={{user:viewStore}}/>
+                </Modal>
+            }
         </div>
     )
 }

@@ -1,4 +1,6 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+
 import {
     Customer,
     Infor,
@@ -10,17 +12,15 @@ import {
     HistoryOrder,
     InforCustomer,
     LocationAddress,
-    Order
+    Order,
 } from './Customer'
 import {
     InforStore
 } from './Store'
+import BoardShipper from './Shipper'
 
-import { useSelector } from 'react-redux'
 
 export default function Board({ currentMenu }) {
-
-
     const { auth } = useSelector(state => state)
 
     function renderCurrentMenu() {
@@ -38,13 +38,15 @@ export default function Board({ currentMenu }) {
             case 'infor-customer': // customer
                 return <InforCustomer auth={auth} />
             case 'locaiton-address':
-                return <LocationAddress />
+                return <LocationAddress auth={auth} />
             case 'current-receipt':
-                return <Order />
+                return <Order  auth={auth}/>
             case 'all-receipt':
                 return <HistoryOrder />
             case 'infor-store':
-                return <InforStore auth={auth} />
+                return <InforStore auth={auth} /> //Store
+            case 'shipper-infor':
+                return <BoardShipper auth={auth} /> //Shipper
         }
     }
 

@@ -26,3 +26,11 @@ main{
     }
 
 }
+
+
+
+@include media-breakpoint-down(lg){
+    .wrap-full-mb{
+        width: 100% !important;
+    }
+}

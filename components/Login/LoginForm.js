@@ -17,7 +17,7 @@ export default function LoginForm({ onClose, handleSubmit, auth,onRegster }) {
                             <label htmlFor="password" className="col-form-label">Mật khẩu</label>
                         </div>
                         <div className="col-auto w-75">
-                            <input id="password" className="form-control" name="password" />
+                            <input id="password" type="password" className="form-control" name="password" />
                         </div>
                     </div>
                 </div>

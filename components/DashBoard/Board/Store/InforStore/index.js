@@ -6,7 +6,6 @@ export default function InforStore({ auth }) {
     const [onTab, setOnTab] = useState(storeTab[0])
 
     const { user } = auth
-
     function renderTab() {
         switch (onTab) {
             case storeTab[0]:
@@ -17,7 +16,6 @@ export default function InforStore({ auth }) {
                 break;
         }
     }
-
 
     return (
         <div>

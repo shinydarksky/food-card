@@ -6,5 +6,5 @@ export {
     InforCustomer,
     LocationAddress,
     HistoryOrder,
-    Order
+    Order,
 }

@@ -143,6 +143,10 @@ export const menuRole = [
     },
 ]
 
-
-
-export const defaultMenu = menuAdmin[0]
+export const statusReceipt = {
+    0:'Đang tìm tài xế',
+    1:'Xác nhận đơn hàng',
+    2:'Đang giao hàng',
+    3:'Giao hàng thành công',
+    4:'Đã hủy hơn hàng'
+}

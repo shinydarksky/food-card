@@ -1,39 +1,106 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { addAddress, getListAddress } from '../../../../pages/api/address'
+import { dataMenuArea } from '../../../data/data'
+import Modal from '../../../modal'
 
-export default function Address() {
-  return (
-    <div>
-    <div className="row ms-3 mt-3   ">
-        <div className="title col">
-            <h5>Danh sách các địa chỉ</h5>
-        </div>
-        <div className="col">
-            <form className="d-flex ">
-                <input className="form-control w-75 me-2" type="search" placeholder="Tên khách hàng" aria-label="Search" />
-                <button className="btn btn-outline-success" type="submit">Tìm kiếm</button>
-            </form>
-        </div>
-    </div>
-    <div className="mt-3">
-        <table className="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Tên địa chỉ</th>
-                    <th scope="col">Địa chỉ</th>
-                    <th scope="col">Chỉnh sửa</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
+export default function LocationAddress({ auth }) {
+    const [listAddress, setListAddress] = useState([])
+    const [openNew, setOpenNew] = useState(false)
+    const { user } = auth
+
+    async function updateListAddress(){
+        const results  = await getListAddress(user._id)
+        setListAddress(results)
+    }
+
+    useEffect(async () => {
+        await updateListAddress()
+    }, [])
+
+    function renderTableAddress() {
+        if (listAddress) {
+            return listAddress.map((item, idx) => {
+                return <tr key={idx}>
+                    <th scope="row">{idx+1}</th>
+                    <td>{item.addressLocation}</td>
+                    <td>{item.areaTitle}</td>
                     <td>@mdo</td>
                 </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-  )
+            })
+        }
+    }
+
+
+    async function handleSubmit(e) {
+        e.preventDefault()
+        let { address, area } = e.target
+        address = address.value
+        area = area.value
+        const { name } = dataMenuArea.find(i => i.seo === area)
+        const newAddress =  {
+            userId: user._id,
+            addressLocation: address,
+            areaTitle: name,
+            area: area
+        }
+        await addAddress(newAddress)
+        await updateListAddress()
+    }
+
+    function renderArea() {
+        return dataMenuArea.map((area, idx) => {
+            return <option value={area.seo} key={idx}>
+                {area.name}
+            </option>
+        })
+    }
+
+    return (
+        <div>
+            <div className="ms-3 mt-3">
+                <div className="title">
+                    <h5>Danh sách các địa chỉ</h5>
+                </div>
+                <div className="col">
+                    <div className="food-control d-flex justify-content-end mt-3 mb-3">
+                        <button className="btn btn-primary"
+                            onClick={() => setOpenNew(true)}
+                        >
+                            <i className="fa fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div className="mt-3">
+                <table className="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Địa chỉ</th>
+                            <th scope="col">Khu vực</th>
+                            <th scope="col">Chỉnh sửa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {renderTableAddress()}
+                    </tbody>
+                </table>
+            </div>
+            {openNew &&
+                <Modal onClose={() => setOpenNew(false)}>
+                    <form onSubmit={handleSubmit}>
+                        Địa chỉ
+                        <input className="" name="address" />
+
+                        <select name="area">
+                            {renderArea()}
+                        </select>
+                        <button type="submit">
+                            Thêm
+                        </button>
+                    </form>
+                </Modal>
+            }
+        </div>
+    )
 }

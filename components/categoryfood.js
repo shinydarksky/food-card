@@ -20,10 +20,6 @@ export default function CategoryFood({
             </div>
             <p>{subtitle}</p>
             <div className="food-content">
-                {/* <FoodCard />
-                <FoodCard />
-                <FoodCard />
-                <FoodCard /> */}
                 {renderFoodCategory()}
             </div>
         </div>

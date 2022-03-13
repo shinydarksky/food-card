@@ -24,7 +24,7 @@ export default function NavMenu({ menu, currentMenu, handleMenu,user }) {
 
     return (
         <div className="wrap-nav-menu">
-            <div className="d-flex flex-column flex-shrink-0 p-3 " style={{ width: '280px' }}>
+            <div className="d-flex flex-column  flex-shrink-0 p-3 " >
                 <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                     <svg className="bi me-2" width={40} height={32}><use xlinkHref="#bootstrap" /></svg>
                     <span className="fs-4">Quản lý</span>

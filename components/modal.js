@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function Modal({ onClose, title, children }) {
+export default function Modal({ onClose, title, children,className }) {
     return (
-        <div className="modal d-block mt-3" >
+        <div className={"modal d-block mt-3"+className}>
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">

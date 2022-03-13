@@ -71,7 +71,7 @@ export default function Category({ listFood }) {
                         <div className="wrap-filter">
                             <div className="dropdown">
                                 <a className="btn dropdown-toggle btn-outline-secondary" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Sắp xếp
+                                    Sắp xếp 
                                 </a>
 
                                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
