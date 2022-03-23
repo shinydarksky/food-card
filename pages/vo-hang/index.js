@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Layout from '../../layout'
 import CartItem from '../../components/cartItem'
 import ReceiptForm from '../../components/receiptForm'
+import { setOpenLoginForm } from '../../redux/layoutSlice'
+
 export default function Cart({ }) {
     const auth = useSelector(state => state.auth)
+    const dispatch = useDispatch()
     const [curretListFood, setCurrentListFood] = useState([])
     const [openReceipt, setOpenReceipt] = useState(false)
 
@@ -74,7 +77,9 @@ export default function Cart({ }) {
                     >
                         <i className="fa fa-solid fa-arrow-right "></i>
                     </button>
-                    {auth.isAuth ? '' : <p>Bạn vẫn chưa đăng nhập đăng nhập <a href='/'>tại đây</a></p>}
+                    {auth.isAuth ? '' : <p>Bạn vẫn chưa đăng nhập đăng nhập <span
+                        onClick={()=>dispatch(setOpenLoginForm())}
+                    >tại đây</span></p>}
                     <br />
                     <br />
                 </div>

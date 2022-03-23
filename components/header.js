@@ -7,10 +7,22 @@ import { setCloseLoginForm, setOpenLoginForm } from '../redux/layoutSlice'
 import { loadUser } from '../redux/authSlice'
 export default function Header() {
     const [areaName, setAreaName] = useState('Tỉnh thành')
+    const [showCart, setShowCart] = useState(true)
     const router = useRouter()
     const dispatch = useDispatch()
     const { query } = router
     const { auth } = useSelector(state => state)
+    const { user } = auth
+
+
+    
+
+    useEffect(() => {
+        const { role } = user || ''
+        if(role === 'admin' || role ==='store' || role==='shipper'){
+            setShowCart(false)
+        }else setShowCart(true)
+    },[user])
 
     useEffect(() => {
         dataMenuArea.forEach(item => {
@@ -56,6 +68,8 @@ export default function Header() {
         } else dispatch(setOpenLoginForm())
     }
 
+
+
     return (
         <div className="wrap-header bg-light">
             <nav className="navbar  navbar-expand-lg navbar-light bg-light">
@@ -77,7 +91,6 @@ export default function Header() {
                                 </ul>
                             </li>
                             {renderMenuTopics()}
-
                         </ul>
                     </div>
 
@@ -90,12 +103,7 @@ export default function Header() {
                 <div className="nav-item"
 
                 >
-                    <span type="button" className="btn btn-outline-danger m-1"
-                        onClick={handleOnUser}
-                    >
-                        <i className="fas fas-solid fa-user"></i>
-                    </span>
-                    <span type="button" className="btn btn-outline-danger m-1"
+                    {showCart && <span type="button" className="btn btn-outline-danger m-1"
                         onClick={() => {
                             router.push({
                                 pathname: '/vo-hang',
@@ -103,7 +111,13 @@ export default function Header() {
                         }}
                     >
                         <i className="fas fa-shopping-cart"></i>
+                    </span>}
+                    <span type="button" className="btn btn-outline-danger m-1"
+                        onClick={handleOnUser}
+                    >
+                        <i className="fas fas-solid fa-user"></i>
                     </span>
+                    
                 </div>
             </div>
         </div>

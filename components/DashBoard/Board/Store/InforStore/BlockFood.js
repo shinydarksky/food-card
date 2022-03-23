@@ -24,7 +24,7 @@ export default function BlockFood({ user }) {
 				return <tr key={idx}>
 					<td>{item.name}</td>
 					<td>{item.description && item.description.slice(0, 30)}</td>
-					<td>{item.images  && item.images.length}</td>
+					{/* <td>{item.images  && item.images.length}</td> */}
 					<td>
 						<div className="text-center">
 							<button className="m-1 btn btn-success "
@@ -120,7 +120,7 @@ export default function BlockFood({ user }) {
 						<tr>
 							<th>Tên món ăn</th>
 							<th>Mô tả</th>
-							<th>Số ảnh</th>
+							{/* <th>Số ảnh</th> */}
 							<th>Chi tiết</th>
 						</tr>
 					</thead>

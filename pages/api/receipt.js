@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { urlServer } from './urls'
 
-async function getReceiptOrder(userId,status=0) {
+async function getReceiptOrder(userId) {
     try {
-        const { data } = await axios.get(`${urlServer}/receipt?userId=${userId}&status=${status}`)
+        const { data } = await axios.get(`${urlServer}/receipt?userId=${userId}`)
         if(data.success){
             return data.results
         }
