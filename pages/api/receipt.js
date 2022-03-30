@@ -54,10 +54,19 @@ async function shipperConfirmReceipt(recipt) {
     }
 }
 
+async function getReceiptChartStore(storeId) {
+    try {
+        await axios.get(`${urlServer}/receipt/chart?storeId=${storeId}`)
+    } catch (error) {
+        return error
+    }
+}
+
 export {
     newRecipt,
     getReceiptOrder,
     getOrder,
     getOrderShipper,
-    shipperConfirmReceipt
+    shipperConfirmReceipt,
+    getReceiptChartStore
 }

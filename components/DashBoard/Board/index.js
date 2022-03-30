@@ -15,12 +15,13 @@ import {
     Order,
 } from './Customer'
 import {
-    InforStore
+    InforStore,
+    Chart
 } from './Store'
 import BoardShipper from './Shipper'
 
 
-export default function Board({ currentMenu}) {
+export default function Board({ currentMenu }) {
     const { auth } = useSelector(state => state)
     function renderCurrentMenu() {
         switch (currentMenu.href) {
@@ -39,11 +40,13 @@ export default function Board({ currentMenu}) {
             case 'locaiton-address':
                 return <LocationAddress auth={auth} />
             case 'current-receipt':
-                return <Order  auth={auth}/>
+                return <Order auth={auth} />
             case 'all-receipt':
                 return <HistoryOrder />
             case 'infor-store':
                 return <InforStore auth={auth} /> //Store
+            case 'chart':
+                return <Chart auth={auth} />
             case 'shipper-infor':
                 return <BoardShipper auth={auth} /> //Shipper
         }
