@@ -27,6 +27,21 @@ main{
 
 }
 
+
+.modal-styles{
+    max-height: 600px;
+    overflow-y:auto;
+}
+
+.wrap-payment{
+    width: 60%;
+    margin: 0 auto;
+
+    .type-payment{
+        
+    }
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -43,5 +58,9 @@ input[type=number] {
 @include media-breakpoint-down(lg){
     .wrap-full-mb{
         width: 100% !important;
+    }
+
+    .wrap-payment{
+        width: 90%;
     }
 }

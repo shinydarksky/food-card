@@ -5,7 +5,22 @@ import { useRouter } from 'next/router'
 import { setOpenLoginForm } from '../../redux/layoutSlice'
 import Dashboard from '../../components/DashBoard'
 
-export default function index() {
+export async function getServerSideProps(context) {
+    try {
+        let currentTab = context.query.currentTab || null
+        return {
+            props: {currentTab: currentTab  },
+        }
+    } catch (e) {
+        context.res.statusCode = 404;
+        return {
+            notFound: true,
+        }
+    }
+}
+
+
+export default function index({currentTab}) {
     const router = useRouter()
     const { auth } = useSelector(state => state)
     const dispatch = useDispatch()
@@ -26,7 +41,7 @@ export default function index() {
                 </div>
             </div>}
             {auth.isAuth ? <div>
-                <Dashboard user={user} />
+                <Dashboard user={user} currentTab={currentTab}/>
             </div> :
                 <div className="error-wrapper">
                     <h2 ><span >Tài khoản chưa đăng nhập</span> | hoặc đăng nhập thất bại

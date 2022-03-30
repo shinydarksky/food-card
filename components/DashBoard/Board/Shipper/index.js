@@ -16,9 +16,14 @@ export default function InforShipper({ auth }) {
 			setListOrder(orderData)
 		}
 	}
-
+	let eventRefesh = null
 	useEffect(async () => {
-		await updateReceipt()
+		eventRefesh = setInterval(async ()=>{
+			await updateReceipt()
+		},1000)
+		return ()=>{
+			clearInterval(eventRefesh)
+		}
 	}, [])
 
 

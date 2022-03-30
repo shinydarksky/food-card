@@ -1,19 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Modal from './modal'
+import { useRouter } from "next/router";
 import { getFoodFromCart } from '../pages/api/food'
-import { getListAddress } from '../pages/api/address'
 import { newRecipt } from '../pages/api/receipt'
 export default function ReceiptForm({ onClose, curretListFood, auth }) {
     const [currentRecipt, setCurrentReceipt] = useState([])
-    const [listAddress, setListAddress] = useState([])
     const { user } = auth
-
+    const router = useRouter()
     useEffect(async () => {
         const response = await getFoodFromCart(curretListFood)
         setCurrentReceipt(response)
-
-        const results = await getListAddress(user._id)
-        setListAddress(results)
     }, [])
 
     const total = useRef()
@@ -38,34 +34,27 @@ export default function ReceiptForm({ onClose, curretListFood, auth }) {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        let { discountCode, addressLocation } = e.target
-        discountCode = discountCode.value
-        addressLocation = addressLocation.value
         const dataReceipt = {
             listFood: currentRecipt,
             userId: user._id,
-            discountCode: discountCode,
-            addressLocation: addressLocation,
             prices: total.current
         }
-        await newRecipt(dataReceipt)
-        onClose(true)
+        router.push({
+            pathname: '/thanh-toan',
+            query: {
+                code: JSON.stringify(dataReceipt)
+            }
+        })
+        // await newRecipt(dataReceipt)
+        // onClose(true)
     }
 
-    function renderAddress() {
-        return listAddress.map((item, idx) => {
-            return <option key={idx}
-                value={item.addressLocation + ' - ' + item.areaTitle}
-            >
-                {item.addressLocation}-{item.areaTitle}
-            </option>
-        })
-    }
+    
 
     return (
         <Modal
-            title="Thanh toán"
-            onClose={()=>onClose()}
+            title="Thông tin hóa đơn"
+            onClose={() => onClose()}
         >
             <table className="table table-bordered ">
                 <thead>
@@ -82,29 +71,13 @@ export default function ReceiptForm({ onClose, curretListFood, auth }) {
             </table>
 
             <form onSubmit={handleSubmit}>
-                <div className="d-flex justify-content-between m-2">
-                    <div className="col-auto w-25">
-                        <label htmlFor="addressLocation" className="col-form-label">Địa chỉ</label>
-                    </div>
-                    <div className="col-auto w-75">
-                        <select id="addressLocation" className="form-control" >
-                            {renderAddress()}
-                        </select>
-                    </div>
-                </div>
-                <div className="d-flex justify-content-between m-2">
-                    <div className="col-auto w-25">
-                        <label htmlFor="discountCode" className="col-form-label">Mã  giảm giá</label>
-                    </div>
-                    <div className="col-auto w-75">
-                        <input id="discountCode" className="form-control" />
-                    </div>
-                </div>
                 <div className="text-center m-3">
-                    <button className="btn btn-primary"
+                    <button className="btn btn-danger me-1"
+                        onClick={()=>onClose()}
+                    >Hủy</button>
+                    <button className="btn btn-success"
                         type="submit"
-                    >Thanh toán
-                    </button>
+                    >Đặt hàng</button>
                 </div>
             </form>
         </Modal>

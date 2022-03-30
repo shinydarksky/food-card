@@ -1,8 +1,8 @@
 import axios from "axios";
 import { urlServer } from "./urls";
 
-async function getFoodFromArea(area = 'all', keyword = '') {
-    const results = await axios.post(`${urlServer}/food/area`, { area: area.trim(), keyword: keyword })
+async function getFoodFromArea(area = 'all', keyword = '',order) {
+    const results = await axios.post(`${urlServer}/food/area`, { area: area.trim(), keyword: keyword ,order:order})
     const { data } = results
     if (data.success) {
         return data.results
@@ -65,11 +65,25 @@ async function getFoodFromCart(cardData) {
     }
 }
 
+async function getAddressProduct(_id) {
+    try {
+        const { data } = await axios.get(`${urlServer}/food/address?_id=${_id}`)
+        if (data.success) {
+            const { results } = data
+            return results
+        }
+        else return []
+    } catch (error) {
+        return []
+    }
+}
+
 export {
     getFoodFromArea,
     getPageHome,
     getFoodFromCart,
     searchFood,
     addFood,
-    editFood
+    editFood,
+    getAddressProduct
 }

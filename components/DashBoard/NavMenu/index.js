@@ -1,9 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setLogout } from '../../../redux/authSlice'
-export default function NavMenu({ menu, currentMenu, handleMenu,user }) {
+export default function NavMenu({ menu, currentMenu, handleMenu,user,currentTab }) {
     const dispatch = useDispatch()
     
+    useEffect(() => {
+        const findCurrentTab = menu.find(a=>a.href===currentTab)
+        if(findCurrentTab){
+            handleMenu(findCurrentTab)
+        }
+    }, [])
+    
+
     function renderMenuItem() {
         if (menu) {
             return menu.map((item, idx) => {

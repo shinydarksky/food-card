@@ -20,9 +20,8 @@ import {
 import BoardShipper from './Shipper'
 
 
-export default function Board({ currentMenu }) {
+export default function Board({ currentMenu}) {
     const { auth } = useSelector(state => state)
-
     function renderCurrentMenu() {
         switch (currentMenu.href) {
             case 'infor': //admin

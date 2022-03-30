@@ -1,7 +1,7 @@
 import React from 'react'
-import CardFood from './cardFood'
+import CardProduct from './cardProduct'
 
-export default function CategoryFood({
+export default function CategoryProduct({
     title="Món ăn hot",
     subtitle="Khám phá những món ăn được yêu thích nhất",
     listFood=[]
@@ -9,7 +9,7 @@ export default function CategoryFood({
 
     function renderFoodCategory(){
         return listFood.slice(0,8).map((item,idx)=>{
-            return <CardFood key={idx} food={item}/>
+            return <CardProduct key={idx} food={item}/>
         })
     }
 

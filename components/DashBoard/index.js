@@ -3,8 +3,9 @@ import { menuAdmin, menuCustomer, menuShipper, menuStore } from '../data/menu'
 import Board from './Board'
 import NavMenu from './NavMenu'
 
-export default function index({ user }) {
+export default function index({ user,currentTab }) {
 	const [currentMenu, setCurrentMenu] = useState(renderRole()[0])
+	
 	function renderRole() {
 		switch (user.role) {
 			case 'admin':
@@ -31,6 +32,7 @@ export default function index({ user }) {
 				currentMenu={currentMenu}
 				handleMenu={handleMenu}
 				user={user}
+				currentTab={currentTab}
 			/>
 			<Board currentMenu={currentMenu} menu={renderRole()} />
 		</div>

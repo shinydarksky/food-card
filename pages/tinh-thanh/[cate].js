@@ -2,7 +2,7 @@ import React from 'react'
 import Layout from '../../layout'
 import { useRouter } from "next/router";
 import { getFoodFromArea } from '../api/food';
-import CardFood from '../../components/cardFood'
+import CardProduct from '../../components/cardProduct'
 
 export async function getServerSideProps(context) {
     try {
@@ -36,19 +36,17 @@ export default function Category({ listFood }) {
     function renderCategoryFood() {
         if (listFood.length > 0) {
             return listFood.map((item, idx) => {
-                return <CardFood food={item} key={idx} />
+                return <CardProduct food={item} key={idx} />
             })
         }
     }
 
     return (
         <Layout>
-
-
             <div className="container wrap-intro">
                 <div>
                     <div className="title">
-                        <h3>Tìm món ăn theo tỉnh thành</h3>
+                        <h3>Tìm món ăn </h3>
                     </div>
                     <div className="wrap-filter">
                         <div>
@@ -89,7 +87,6 @@ export default function Category({ listFood }) {
 
                     <div className="food-content">
                         {renderCategoryFood()}
-
                     </div>
                 </div>
             </div>

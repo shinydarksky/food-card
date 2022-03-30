@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+
 import { statusReceipt } from '../../../data/menu'
-export default function OrderItem({ order = {},handleConfirmOrder }) {
+import ViewProduct from '../../../ViewProduct'
+export default function OrderItem({ order = {}, handleConfirmOrder }) {
+	const [currentProduct, setCurrentProduct] = useState(null)
+	function handleClickProduct(product) {
+		setCurrentProduct(product)
+	}
 
 	function renderTableReceipt() {
 		const listFood = order.listFood || []
 		let total = 0
 		let results = listFood.map((item, idx) => {
 			total += item.price * item.num
-			return <tr key={idx}>
+			return <tr key={idx}
+				onClick={() => handleClickProduct(item)}
+			>
 				<td>{item.name}</td>
 				<td>{item.price}</td>
 				<td>{item.num}</td>
@@ -22,13 +30,13 @@ export default function OrderItem({ order = {},handleConfirmOrder }) {
 		return results
 	}
 
-	function handleConfirmReceipt(e){
-		handleConfirmOrder(order,e.target.value)
+	function handleConfirmReceipt(e) {
+		handleConfirmOrder(order, e.target.value)
 	}
 
-	function renderOptionReceipt(){
+	function renderOptionReceipt() {
 		let results = []
-		for(let item in statusReceipt){
+		for (let item in statusReceipt) {
 			results.push(<option key={item} value={item}>
 				{statusReceipt[item]}
 			</option>)
@@ -66,7 +74,13 @@ export default function OrderItem({ order = {},handleConfirmOrder }) {
 					<label htmlFor="discountCode" className="col-form-label">Mã  giảm giá: </label>
 				</div>
 			</div>
-			<hr/>
+			<hr />
+			{currentProduct &&
+				<ViewProduct
+					onClose={()=>setCurrentProduct(null)}
+					product={currentProduct}
+				/>
+			}
 		</div>
 	)
 }

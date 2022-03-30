@@ -39,7 +39,8 @@ async function getOrderShipper(shipperId,status=0) {
 
 async function newRecipt(recipt) {
     try {
-        await axios.post(`${urlServer}/receipt`, recipt)
+        const {data} = await axios.post(`${urlServer}/receipt`, recipt)
+        return data
     } catch (error) {
         return error
     }
