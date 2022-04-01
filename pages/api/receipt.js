@@ -4,7 +4,7 @@ import { urlServer } from './urls'
 async function getReceiptOrder(userId) {
     try {
         const { data } = await axios.get(`${urlServer}/receipt?userId=${userId}`)
-        if(data.success){
+        if (data.success) {
             return data.results
         }
         else return []
@@ -13,10 +13,10 @@ async function getReceiptOrder(userId) {
     }
 }
 
-async function getOrder(status=0) {
+async function getOrder(status = 0) {
     try {
         const { data } = await axios.get(`${urlServer}/receipt?status=${status}`)
-        if(data.success){
+        if (data.success) {
             return data.results
         }
         else return []
@@ -25,10 +25,10 @@ async function getOrder(status=0) {
     }
 }
 
-async function getOrderShipper(shipperId,status=0) {
+async function getOrderShipper(shipperId, status = 0) {
     try {
         const { data } = await axios.get(`${urlServer}/receipt/confirm?shipperId=${shipperId}`)
-        if(data.success){
+        if (data.success) {
             return data.results
         }
         else return []
@@ -39,7 +39,7 @@ async function getOrderShipper(shipperId,status=0) {
 
 async function newRecipt(recipt) {
     try {
-        const {data} = await axios.post(`${urlServer}/receipt`, recipt)
+        const { data } = await axios.post(`${urlServer}/receipt`, recipt)
         return data
     } catch (error) {
         return error
@@ -56,7 +56,8 @@ async function shipperConfirmReceipt(recipt) {
 
 async function getReceiptChartStore(storeId) {
     try {
-        await axios.get(`${urlServer}/receipt/chart?storeId=${storeId}`)
+        const { data } = await axios.get(`${urlServer}/receipt/chart?storeId=${storeId}`)
+        return data
     } catch (error) {
         return error
     }

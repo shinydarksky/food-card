@@ -12,3 +12,11 @@ export const customerTab = [
     'success',
     'failed'
 ]
+
+
+export const ChartTab = [
+    'day',
+    'week',
+    'all',
+    'custom',
+]
