@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { addAddress, getListAddress } from '../../../../pages/api/address'
 import { dataMenuArea } from '../../../data/data'
+import FieldInput from '../../../Field/FieldInput'
+import FieldSelect from '../../../Field/FieldSelect'
 import Modal from '../../../modal'
-
 export default function LocationAddress({ auth }) {
     const [listAddress, setListAddress] = useState([])
     const [openNew, setOpenNew] = useState(false)
     const { user } = auth
 
-    async function updateListAddress(){
-        const results  = await getListAddress(user._id)
+    async function updateListAddress() {
+        const results = await getListAddress(user._id)
         setListAddress(results)
     }
 
@@ -21,7 +22,7 @@ export default function LocationAddress({ auth }) {
         if (listAddress) {
             return listAddress.map((item, idx) => {
                 return <tr key={idx}>
-                    <th scope="row">{idx+1}</th>
+                    <th scope="row">{idx + 1}</th>
                     <td>{item.addressLocation}</td>
                     <td>{item.areaTitle}</td>
                     <td>@mdo</td>
@@ -37,7 +38,7 @@ export default function LocationAddress({ auth }) {
         address = address.value
         area = area.value
         const { name } = dataMenuArea.find(i => i.seo === area)
-        const newAddress =  {
+        const newAddress = {
             userId: user._id,
             addressLocation: address,
             areaTitle: name,
@@ -87,17 +88,29 @@ export default function LocationAddress({ auth }) {
                 </table>
             </div>
             {openNew &&
-                <Modal onClose={() => setOpenNew(false)}>
+                <Modal onClose={() => setOpenNew(false)}
+                    title="Thêm địa chỉ"
+                >
                     <form onSubmit={handleSubmit}>
-                        Địa chỉ
-                        <input className="" name="address" />
-
-                        <select name="area">
-                            {renderArea()}
-                        </select>
-                        <button type="submit">
-                            Thêm
-                        </button>
+                        <FieldInput
+                            title="Địa chỉ"
+                            name="address"
+                        />
+                        <FieldSelect
+                            name="area"
+                            title="Tỉnh thành"
+                            data={renderArea()}
+                        />
+                        <div className="text-center ">
+                            <button className="btn btn-danger m-1"
+                                onClick={() => setOpenNew(false)}
+                            >
+                                Đóng
+                            </button>
+                            <button className="btn btn-success m-1" type="submit">
+                                Thêm
+                            </button>
+                        </div>
                     </form>
                 </Modal>
             }
