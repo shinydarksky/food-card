@@ -12,6 +12,7 @@
                 .group-button{
                     text-align: center;
                 }
+
             }
 
             @keyframes animationFoodItem {
@@ -19,17 +20,21 @@
                     transform: scale(1);
                 }
                 to {
-                    // transform: scale(1.2);
+                    transform: scale(1.05);
                 }
             }
 
 
+                
             .food-item:hover{
                 cursor: pointer;
-                transform: scale(1.1);
                 animation-name: animationFoodItem;
                 animation-duration: 1s;
                 z-index: 1;
+
+                .btn-add-cart:active{
+                   transform: skewY(-10deg) translate(10px,-10px);
+                }
             }
         }
     }

@@ -37,7 +37,7 @@ export default function CardFood({ food }) {
                     <a href="#" className="btn btn-danger">
                         Xem chi tiết
                     </a>
-                    <span href="#" className="btn btn-danger btn-add-cart" onClick={() => handleCart(food)}>
+                    <span className="btn btn-danger btn-add-cart" onClick={() => handleCart(food)}>
                         <i className="fas fa-shopping-cart"></i>
                         Giỏ hàng
                     </span>

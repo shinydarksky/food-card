@@ -36,7 +36,12 @@ export default function Header() {
         if (dataMenuArea) {
             return dataMenuArea.map((item, idx) => {
                 return <Link
-                    href={'/tinh-thanh/' + item.seo}
+                    href={{
+                        pathname:'/tinh-thanh/[cate]',
+                        query:{
+                            cate:item.seo
+                        }
+                    }}
                     key={idx}
                 >
                     <li><a className="dropdown-item" href="#">{item.name}</a></li>

@@ -78,6 +78,20 @@ async function getAddressProduct(_id) {
     }
 }
 
+async function getSpecialsFood(cate,page=1,num=10) {
+    try {
+        const { data } = await axios.get(`${urlServer}/food/specials?cate=${cate}&page=${page}&num=${num}`)
+        if (data.success) {
+            const { results } = data
+            return results
+        }
+        else return []
+    } catch (error) {
+        return []
+    }
+}
+
+
 export {
     getFoodFromArea,
     getPageHome,
@@ -85,5 +99,6 @@ export {
     searchFood,
     addFood,
     editFood,
-    getAddressProduct
+    getAddressProduct,
+    getSpecialsFood
 }
