@@ -65,6 +65,12 @@ export default function OrderItem({ order = {}, handleConfirmOrder }) {
 			</table>
 			<div className="d-flex justify-content-between m-2">
 				<div className="col-auto w-50">
+					<label htmlFor="addressLocation" className="col-form-label">Số điện thoại: {order.phone || ''}</label>
+
+				</div>
+			</div>
+			<div className="d-flex justify-content-between m-2">
+				<div className="col-auto w-50">
 					<label htmlFor="addressLocation" className="col-form-label">Địa chỉ: {order.addressLocation || ''}</label>
 
 				</div>

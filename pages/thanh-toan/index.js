@@ -3,6 +3,7 @@ import Layout from '../../layout'
 import { getListAddress } from '../api/address'
 import { useRouter } from "next/router";
 import { newRecipt } from '../api/receipt';
+import { getUserInfor } from '../api/user';
 
 export async function getServerSideProps(context) {
     try {
@@ -22,10 +23,15 @@ export async function getServerSideProps(context) {
 export default function index({ dataReceipt }) {
     const total = useRef()
     const [listAddress, setListAddress] = useState([])
+    const [userInfor, setUserInfor] = useState({})
     const router = useRouter()
     useEffect(async () => {
         const results = await getListAddress(dataReceipt.userId)
         setListAddress(results)
+
+
+        const userInfor = await getUserInfor(dataReceipt.userId)
+		setUserInfor(userInfor.results)
     }, [])
 
     function renderTableReceipt() {
@@ -59,32 +65,35 @@ export default function index({ dataReceipt }) {
         })
     }
 
-    function handleClose(){
+    function handleClose() {
         router.push({
-            pathname:'/vo-hang'
+            pathname: '/vo-hang'
         })
     }
 
-    async function handleCompleteReceipt(e){
+    async function handleCompleteReceipt(e) {
         e.preventDefault()
-        let {addressLocation ,discountCode} = e.target
+        let { addressLocation, discountCode,phone } = e.target
         addressLocation = addressLocation.value
         discountCode = discountCode.value
-        const response = await newRecipt({...dataReceipt,
-            addressLocation:addressLocation,
-            discountCode:discountCode
+        phone = phone.value
+        const response = await newRecipt({
+            ...dataReceipt,
+            addressLocation: addressLocation,
+            discountCode: discountCode,
+            phone:phone
         })
-        if(response.success){
+        if (response.success) {
             alert(response.message)
             localStorage.removeItem('ltship-cart')
             router.push({
-                pathname:'/tai-khoan',
-                query:{
-                    currentTab:'current-receipt'
+                pathname: '/tai-khoan',
+                query: {
+                    currentTab: 'current-receipt'
                 }
             })
         }
-    }   
+    }
 
     return (
         <Layout>
@@ -106,51 +115,56 @@ export default function index({ dataReceipt }) {
                     </tbody>
                 </table>
                 <form onSubmit={handleCompleteReceipt}>
-                <div>
-                    <div className="row g-3 align-items-center">
-                        <div className="col-auto w-50">
-                            <span>Địa chỉ nhận hàng</span>
-                            <select className="form-control" name="addressLocation">
-                                {renderAddress()}
-                            </select>
+                    <div>
+                        <div className="row g-3 align-items-center">
+                            <div className="col-auto w-50">
+                                <span>Số điện thoại nhận hàng</span>
+                                <input className="form-control" name="phone" defaultValue={userInfor.phone} />
+                            </div>
+                            <div className="col-auto w-50">
+                                <span>Địa chỉ nhận hàng</span>
+                                <select className="form-control" name="addressLocation">
+                                    {renderAddress()}
+                                </select>
+                            </div>
+                            <div className="col-auto w-50">
+                                <span>Mã giảm giá</span>
+                                <input className="form-control" name="discountCode" />
+                            </div>
+
                         </div>
-                        <div className="col-auto w-50">
-                            <span>Mã giảm giá</span>
-                            <input className="form-control" name="discountCode" />
+                    </div>
+                    <div>
+                        <div className="title m-3">
+                            <h5>Phương thức thanh toán</h5>
+                        </div>
+                        <div className="form-check type-payment">
+                            <input className="form-check-input" id='cash' type="radio" name="type-payment" />
+                            <label htmlFor='cash'>
+                                Thanh toán khi nhận hàng
+                            </label>
+                        </div>
+                        <div className="form-check type-payment">
+                            <input className="form-check-input" id='momo' type="radio" name="type-payment" />
+                            <label htmlFor='momo'>
+                                Thanh toán qua ví momo
+                            </label>
+                        </div>
+                        <div className="form-check type-payment">
+                            <input className="form-check-input" id='bank' type="radio" name="type-payment" />
+                            <label htmlFor='bank'>
+                                Thanh toán qua nhận hàng
+                            </label>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <div className="title m-3">
-                        <h5>Phương thức thanh toán</h5>
+                    <div className="text-center m-3">
+                        <button className="btn btn-danger me-1"
+                            onClick={handleClose}
+                        >Trở lại</button>
+                        <button className="btn btn-success"
+                            type="submit"
+                        >Hoàn tất</button>
                     </div>
-                    <div className="form-check type-payment">
-                        <input className="form-check-input" id='cash' type="radio" name="type-payment" />
-                        <label htmlFor='cash'>
-                            Thanh toán khi nhận hàng
-                        </label>
-                    </div>
-                    <div className="form-check type-payment">
-                        <input className="form-check-input" id='momo' type="radio" name="type-payment" />
-                        <label htmlFor='momo'>
-                            Thanh toán qua ví momo
-                        </label>
-                    </div>
-                    <div className="form-check type-payment">
-                        <input className="form-check-input" id='bank' type="radio" name="type-payment" />
-                        <label htmlFor='bank'>
-                            Thanh toán qua nhân hàng
-                        </label>
-                    </div>
-                </div>
-                <div className="text-center m-3">
-                    <button className="btn btn-danger me-1"
-                        onClick={handleClose}
-                    >Trở lại</button>
-                    <button className="btn btn-success"
-                        type="submit"
-                    >Hoàn tất</button>
-                </div>
                 </form>
             </div>
         </Layout>
