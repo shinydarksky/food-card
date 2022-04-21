@@ -7,6 +7,13 @@ main{
     overflow:hidden;
 }
 
+
+.header-logo{
+    color: #ff0000;
+    text-shadow: 1px 1px 1px #d0aeae;
+    font-style: italic;
+}
+
 .main{
     width: 80%;
     margin: 0 auto;
@@ -54,6 +61,27 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+.bread-box{
+    box-shadow: 0px 0px 3px 1px #c0c0c0;
+    padding: 10px;
+    margin: 5px;
+}
+
+.wrap-detail{
+    display: flex;
+    .group-images{
+        text-align: center;
+            img{
+            margin: 3px;
+            width: 600px;
+            height: 400px;
+        }
+    }
+
+    .btn-cart{
+      
+    }
+}
 
 @include media-breakpoint-down(lg){
     .wrap-full-mb{

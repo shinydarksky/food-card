@@ -84,7 +84,8 @@ export default function Header() {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
                         <a className="navbar-brand" href="/">
-                            <img className="h-logo" src="/assets/images/logo.png" alt="logo" />
+                            <h1 className="header-logo">LTSHIP</h1>
+                            {/* <img className="h-logo" src="/assets/images/logo.png" alt="logo" /> */}
                         </a>
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0 flex-wrap">
                             <li className="nav-item dropdown">

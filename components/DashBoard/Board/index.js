@@ -13,10 +13,11 @@ import {
     InforCustomer,
     LocationAddress,
     Order,
+    CustomerReport
 } from './Customer'
 import {
     InforStore,
-    Chart
+    Chart,
 } from './Store'
 import BoardShipper from './Shipper'
 
@@ -43,6 +44,8 @@ export default function Board({ currentMenu }) {
                 return <Order auth={auth} />
             case 'all-receipt':
                 return <HistoryOrder />
+            case 'report':
+                return <CustomerReport />
             case 'infor-store':
                 return <InforStore auth={auth} /> //Store
             case 'chart':

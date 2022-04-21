@@ -11,8 +11,13 @@
 
                 .group-button{
                     text-align: center;
+                    span{
+                        margin: 2px;
+                    }
                 }
-
+                img{
+                   height: 200px;
+                }
             }
 
             @keyframes animationFoodItem {
@@ -33,7 +38,7 @@
                 z-index: 1;
 
                 .btn-add-cart:active{
-                   transform: skewY(-10deg) translate(10px,-10px);
+                   transform: skewY(-3deg) translate(1px,-1px);
                 }
             }
         }

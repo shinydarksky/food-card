@@ -54,6 +54,11 @@ export const menuCustomer = [
         icon:'fa fa-map-marker',
         href:'locaiton-address'
     },
+    {
+        title:'Báo cáo',
+        icon:'fa fa-rocket',
+        href:'report'
+    },
 ]
 
 export const menuStore = [

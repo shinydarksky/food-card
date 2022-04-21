@@ -1,6 +1,7 @@
+import { useRouter } from 'next/router'
 import React from 'react'
-
 export default function CardFood({ food }) {
+    const router = useRouter()
 
     function handleCart() {
         let currentCart = JSON.parse(localStorage.getItem('ltship-cart'))
@@ -32,11 +33,17 @@ export default function CardFood({ food }) {
             <div className="card-body">
                 <h5 className="card-title">{food.name}</h5>
                 <p className="card-text">{food.price}$</p>
-                <p className="card-text">{food.description}</p>
+                <p className="card-text">{food.description.trim().slice(0,100)}....</p>
                 <div className="group-button">
-                    <a href="#" className="btn btn-danger">
+                    <span className="btn btn-danger"
+                        onClick={()=>{
+                            router.push({
+                                pathname:`/${food._id}`
+                            })
+                        }}
+                    >
                         Xem chi tiết
-                    </a>
+                    </span>
                     <span className="btn btn-danger btn-add-cart" onClick={() => handleCart(food)}>
                         <i className="fas fa-shopping-cart"></i>
                         Giỏ hàng
